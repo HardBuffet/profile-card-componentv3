@@ -1,0 +1,17 @@
+@use "../../scss/themes" as ts;
+@use "../../scss/abstracts" as as;
+
+/* attribution */
+.attribution {
+  padding: as.$vs-pad-100;
+  background: {
+    color: ts.$te-attr_bg-clr;
+  }
+}
+
+// only for the challenge
+.attribution {
+  @include as.ms-pos($posVal: fixed, $bottomLeft: true);
+
+  width: 100%;
+}

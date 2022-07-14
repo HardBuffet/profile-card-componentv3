@@ -1,0 +1,8 @@
+@use "../themes" as ts;
+
+.page {
+  color: ts.$te-page_clr;
+  background: {
+    color: ts.$te-page_bg-clr;
+  }
+}

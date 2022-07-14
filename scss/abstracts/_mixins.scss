@@ -1,0 +1,159 @@
+@use "variables" as vs;
+
+// ==========================================================================
+// only screen readers
+// ==========================================================================
+@mixin sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+// ==========================================================================
+// breakpoints
+// ==========================================================================
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get(vs.$breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == "string",
+      unquote($raq-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{vs.$breakpoints}`. ' +
+        'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+// ==========================================================================
+// grid
+// ==========================================================================
+@mixin grid(
+  $pI: false,
+  $gTC: false,
+  $gTR: false,
+  $aI: false,
+  $jC: false,
+  $gTCVal: auto,
+  $gTRVal: auto,
+  $pIVal: center,
+  $aIVal: center,
+  $jCVal: center
+) {
+  display: grid;
+
+  @if $pI {
+    place: {
+      items: $pIVal;
+    }
+  }
+
+  @if $gTC {
+    grid: {
+      template: {
+        columns: $gTCVal;
+      }
+    }
+  }
+
+  @if $gTR {
+    grid: {
+      template: {
+        rows: $gTRVal;
+      }
+    }
+  }
+
+  @if $aI {
+    align: {
+      items: $aIVal;
+    }
+  }
+
+  @if $jC {
+    justify: {
+      content: $jCVal;
+    }
+  }
+}
+
+// ==========================================================================
+// flex
+// ==========================================================================
+@mixin flex(
+  $dir: false,
+  $aI: false,
+  $jC: false,
+  $dirVal: column,
+  $aIVal: center,
+  $jCVal: center
+) {
+  display: flex;
+
+  @if $dir {
+    flex: {
+      direction: $dirVal;
+    }
+  }
+
+  @if $aI {
+    align: {
+      items: $aiVal;
+    }
+  }
+
+  @if $jC {
+    justify: {
+      content: $jcVal;
+    }
+  }
+}
+
+// ==========================================================================
+// position
+// ==========================================================================
+@mixin pos(
+  $pos: true,
+  $posVal: absolute,
+  $topLeft: false,
+  $topRight: false,
+  $bottomLeft: false,
+  $bottomRight: false,
+  $leftVal: 0,
+  $topVal: 0,
+  $rightVal: 0,
+  $bottomVal: 0
+) {
+  @if $pos {
+    position: $posVal;
+
+    @if $topLeft {
+      top: $topVal;
+      left: $leftVal;
+    }
+
+    @if $topRight {
+      top: $topVal;
+      right: $rightVal;
+    }
+
+    @if $bottomLeft {
+      bottom: $bottomVal;
+      left: $leftVal;
+    }
+
+    @if $bottomRight {
+      bottom: $bottomVal;
+      right: $rightVal;
+    }
+  }
+}
